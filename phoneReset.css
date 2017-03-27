@@ -1,0 +1,111 @@
+html,body{
+  font-size: 10px;
+}
+@media screen and (min-width: 319px) {
+  html,
+  body {
+    font-size: 12px;
+  }
+}
+@media screen and (min-width: 359px) {
+  html,body{
+    font-size: 13px;
+  }
+
+}
+@media screen and (min-width: 374px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+}
+@media screen and (min-width: 410px) {
+  html,body{
+    font-size: 15px;
+  }
+}
+@media screen and (min-width: 434px) {
+  html,
+  body {
+    font-size: 16px;
+  }
+}
+@media screen and (min-width: 559px) {
+  html,
+  body {
+    font-size: 21px;
+  }
+}
+
+@media screen and (min-width: 613px) {
+  html,body{
+    font-size: 23px;
+  }
+}
+@media screen and (min-width: 639px) {
+  html,
+  body {
+    font-size: 24px;
+  }
+}
+@media screen and (min-width: 719px) {
+  html,
+  body {
+    font-size: 27px;
+  }
+}
+@media screen and (min-width: 739px){
+  html,body{
+    font-size: 28px;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  html,
+  body {
+    font-size: 29px;
+  }
+}
+
+@media screen and (min-width: 819px){
+  html,body{
+    font-size: 31px;
+  }
+}
+@media screen and (min-width: 939px){
+  html,body{
+    font-size: 33px;
+  }
+}
+
+@media screen and (min-width: 959px) {
+  html,
+  body {
+    font-size: 36px;
+  }
+}
+
+@media screen and (min-width: 979px){
+  html,body{
+    font-size: 38px;
+  }
+
+}
+@media screen and (min-width: 1079px) {
+  html,body{
+    font-size: 40px;
+  }
+}
+@media screen and (min-width: 1241px){
+  html,body{
+    font-size: 46px;
+  }
+}
+
+$designPageWidth: 375;
+
+$pageWidthVSfontSize: 14;
+
+@function trans($px) {
+  @return ( $px * $pageWidthVSfontSize / $designPageWidth) * 1rem;
+}

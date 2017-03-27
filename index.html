@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>base</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jQueryBase.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery-syntax-3.1.1/jquery.syntax.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(function () {
+            // 锚点定位
+            $('nav a').click(function () {
+                $(this).maoDian();
+            });
+            // pre 代码高亮
+            jQuery.syntax({
+                theme: 'paper',
+                blockLayout: 'fixed'
+            });
+            // 加载中
+            //$.loadingStart();
+            // div模拟select
+            $("#select1").divSelect(2);
+            // 金额转化带逗号
+            $(".jinEinput").blur(function () {
+                $(".jinE").html($.jinE($(this).val()));
+            });
+            // 普通弹窗
+            $("#alertBtn").click(function () {
+                $.alert(['#alert123', {
+                    "www": /^[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?$/i,
+                    "phone": /^1([3|5|6|7|8])\d{9}$/,
+					}], function () {
+                    alert("完成！");
+
+
+                });
+            });
+            $("#alertBtn222222").click(function () {
+                $.alert(['#alert12333333', {
+                    "www": /^[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?$/i,
+                    "phone": /^1([3|5|6|7|8])\d{9}$/,
+					}], function () {
+                    alert("完成！");
+                });
+            });
+            // （普通文字提示）弹窗
+            $("#alertBtn2").click(function () {
+                $.alert(['此处文字自定义！'], function () {
+                    // console.log("这里是回调！");
+
+
+                });
+            });
+            // （自定义文字）弹窗
+            $("#alertBtn3").click(function () {
+                $.alert([["此处文字自定义", "此处文字自定义", "此处文字自定义"]], function (obj) {
+                    // console.log("这里是回调！");
+
+                });
+            });
+
+            // 第三个 弹窗
+            $("#towalert3").click(function () {
+                $.alert(["#alert12345"], function (obj) {
+                    // console.log("这里是回调！");
+
+                });
+            });
+            // 双层alert 弹窗
+            $("#towalert").click(function () {
+                $.alert(["双层弹窗"], function () {
+                    $.alert(["hello ~ 看我~~"]);
+                });
+            });
+            // 
+            $("#towalert2").click(function () {
+                $.alert(['#alert1234'], function (obj) {
+                    // console.log("这里是回调！");
+
+
+                });
+            });
+
+
+        });
+    </script>
+</head>
+
+<body>
+    <!--  锚点 导航 -->
+    <div class="demo_maoDian">
+        <nav>
+            <li><a href="#a">加载中</a></li>
+            <li><a href="#b">元素居中</a></li>
+            <li><a href="#c">div弹窗(多种)</a></li>
+            <li><a href="#d">div弹窗(简易)</a></li>
+            <li><a href="#e">金额转化</a></li>
+            <li><a href="#f">div模拟select</a></li>
+            <li><a href="#g">form 表单校验</a></li>
+            <li><a href="#h">cite 提示</a></li>
+            <li><a href="#i">cookie</a></li>
+            <li><a href="#j">ajax</a></li>
+            <li><a href="#k">进度条</a></li>
+            <li><a href="#l">iframe 父级－子级 操作</a></li>
+            <li><a href="#m">锚点定位</a></li>
+        </nav>
+    </div>
+    <div class="demo">
+        <!-- 加载中 -->
+        <div id="a" class="clear">
+            <h2>加载中</h2>
+            <span><a href="javascript:$.loadingStart();">查看演示</a></span>
+            <pre class="syntax brush-javascript">
+&lt;script type="text/javascript"&gt;
+	$.loadingStart();
+&lt;/script&gt;
+</pre>
+        </div>
+        <!-- 元素居中 -->
+        <div id="b" class="clear">
+            <h2>元素居中</h2>
+            <span><a href='javascript:$(".centers").show().center();'>查看演示</a></span>
+            <pre class="syntax brush-javascript">
+&lt;script type="text/javascript"&gt;
+	$(function(){
+		$("#div").center();
+	});
+&lt;/script&gt;
+&lt;div class="centers hide"&gt;
+	元素居中
+&lt;/div&gt;
+</pre>
+
+            <div class="centers hide">
+                元素居中
+            </div>
+        </div>
+        <!-- div弹窗（普通弹窗－多个同时弹窗－带有form表单校验的弹窗） -->
+        <div id="c" class="clear">
+            <h2>div弹窗（普通弹窗－多个同时弹窗－带有form表单校验的弹窗）</h2>
+            <span><a id="alertBtn" href="javascript:;">查看演示</a></span>
+            <pre class="syntax brush-javascript">
+&lt;script type="text/javascript"&gt;
+	// 普通弹窗
+	$("#alertBtn").click(function(){
+		$.alert(['#alert123',{
+			"www":/^[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?$/i,
+			"phone":/^1([3|5|6|7|8])\d{9}$/,
+		}],function(){
+			alert("完成！");
+		});
+	});
+&lt;/script&gt;
+
+&lt;a id="alertBtn" href="javascript:;"&gt;查看演示&lt;/a&gt;
+&lt;div id="alert123" class="alert"&gt;
+	&lt;div class="alert_title"&gt;
+		&lt;div class="fl"&gt;提示&lt;/div&gt;
+		&lt;span class="pic alert_btn_no"&gt;&lt;/span&gt;
+	&lt;/div&gt;
+		&lt;div class="alert_cont" style="width:700px;"&gt;
+			&lt;ul class="ckForm"&gt;
+				&lt;li&gt;
+					&lt;span&gt;公司网址：&lt;/span&gt;
+					&lt;input type="text" value="" has="www" placeholder="" noEmpty="true" /&gt;
+					&lt;i&gt;固定显示的提示信息&lt;/i&gt;
+					&lt;em&gt;请输入正确网址&lt;/em&gt;
+					&lt;div class="clear"&gt;&lt;/div&gt;
+				&lt;/li&gt;
+				&lt;li&gt;
+					&lt;span&gt;公司电话：&lt;/span&gt;
+					&lt;input type="text" value="" has="phone" placeholder="" /&gt;
+					&lt;em&gt;请输入正确手机号&lt;/em&gt;
+					&lt;div class="clear"&gt;&lt;/div&gt;
+				&lt;/li&gt;
+				&lt;li&gt;
+					&lt;span&gt;htmlSlct：&lt;/span&gt;
+					&lt;select&gt;
+						&lt;option value="0"&gt;请选择&lt;/option&gt;
+						&lt;option value="1"&gt;1&lt;/option&gt;
+						&lt;option value="2"&gt;2&lt;/option&gt;
+						&lt;option value="3"&gt;3&lt;/option&gt;
+					&lt;/select&gt;
+					&lt;em&gt;请选择select&lt;/em&gt;
+					&lt;cite&gt;cite提示窗口&lt;/cite&gt;
+					&lt;div class="clear"&gt;&lt;/div&gt;
+				&lt;/li&gt;
+				&lt;li&gt;
+					&lt;span&gt;模拟Slctt：&lt;/span&gt;
+					&lt;div id="select2" class="divSelect fl"&gt;
+						&lt;span&gt;请选择&lt;/span&gt;
+						&lt;ul&gt;
+							&lt;li&gt;&lt;a href="javascript:;" selectid="1"&gt;11111111111111111111111111111111&lt;/a&gt;&lt;/li&gt;
+							&lt;li&gt;&lt;a href="javascript:;" selectid="2"&gt;2222&lt;/a&gt;&lt;/li&gt;
+							&lt;li&gt;&lt;a href="javascript:;" selectid="3"&gt;3333&lt;/a&gt;&lt;/li&gt;
+						&lt;/ul&gt;
+            				&lt;input name="" type="hidden" value="0" class="div-input"/&gt;
+					&lt;/div&gt;
+					&lt;em&gt;请选择select&lt;/em&gt;
+					&lt;div class="clear"&gt;&lt;/div&gt;
+				&lt;/li&gt;
+				&lt;li&gt;
+					&lt;span&gt;更多操作：&lt;/span&gt;
+					&lt;a id="towalert2" class="btn" href="javascript:;"&gt;弹出第二个窗口&lt;/a&gt;
+				&lt;/li&gt;
+			&lt;/ul&gt;
+			
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="alert_btn_box"&gt;
+		&lt;a class="btn alert_btn_yes" href="javascript:;"&gt;确定&lt;/a&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+            <div id="alert123" class="alert">
+                <div class="alert_title">
+                    <div class="fl">窗口1</div>
+                    <span class="pic alert_btn_no"></span>
+                </div>
+                <div class="alert_cont" style="width:700px;">
+                    <ul class="ckForm">
+                        <li>
+                            <span>公司网址：</span>
+                            <input type="text" value="" has="www" only="true" url="test.php" />
+                            <i>固定显示的提示信息</i>
+                            <em>请输入正确网址</em>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>公司电话：</span>
+                            <input type="text" value="" has="phone" placeholder="" />
+                            <em>请输入正确手机号</em>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>htmlSlct：</span>
+                            <select>
+                                <option value="0">请选择</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                            <em>请选择select</em>
+                            <cite>cite提示窗口</cite>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>模拟Slctt：</span>
+                            <div id="select2" class="divSelect fl" noEmpty="true">
+                                <span>请选择</span>
+                                <ul>
+                                    <li><a href="javascript:;" selectid="1">11111111111111111111111111111111</a></li>
+                                    <li><a href="javascript:;" selectid="2">2222</a></li>
+                                    <li><a href="javascript:;" selectid="3">3333</a></li>
+                                </ul>
+                                <input name="" type="hidden" value="0" class="div-input" />
+                            </div>
+                            <em>请选择select</em>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <span>更多操作：</span>
+                            <a id="towalert2" class="btn" href="javascript:;">弹出第二个窗口</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="alert_btn_box">
+                    <a class="btn alert_btn_yes" href="javascript:;">确定</a>
+                </div>
+            </div>
+            <div id="alert1234" class="alert">
+                <div class="alert_title">
+                    <div class="fl">窗口2</div>
+                    <span class="pic alert_btn_no"></span>
+                </div>
+                <div class="alert_cont">
+                    内容区域（222）
+                    <a id="towalert3" class="btn" href="javascript:;">弹出第三个</a>
+                </div>
+                <div class="alert_btn_box">
+                    <a class="btn alert_btn_yes" href="javascript:;">确定</a>
+                </div>
+            </div>
+            <div id="alert12345" class="alert">
+                <div class="alert_title">
+                    <div class="fl">窗口3</div>
+                    <span class="pic alert_btn_no"></span>
+                </div>
+                <div class="alert_cont">
+                    内容区域（333）
+                    <a id="towalert" class="btn" href="javascript:;">弹出第四个</a>
+                </div>
+                <div class="alert_btn_box">
+                    <a class="btn alert_btn_yes" href="javascript:;">确定</a>
+                </div>
+            </div>
+        </div>
+        <!-- div弹窗（文字提示内容自定义－弹窗） -->
+        <div id="d" class="clear">
+            <h2>div弹窗（文字提示内容自定义－弹窗）</h2>
+            <span><a id="alertBtn2" href="javascript:;">查看演示</a></span>
+            <pre class="syntax brush-javascript">
+&lt;script type="text/javascript"&gt;
+	// （普通文字提示）弹窗
+	$("#alertBtn2").click(function(){
+		$.alert(["普通文字提示"],function(obj){
+			// console.log("这里是回调！");
+			
+		});	
+	});
+&lt;/script&gt;
+&lt;a id="alertBtn2" href="javascript:;"&gt;查看演示&lt;/a&gt;
+</pre>
+        </div>
+        <!-- div弹窗（所有文字（标题，内容，按钮）提示内容自定义－弹窗） -->
+        <div id="" class="clear">
+            <h2>div弹窗（所有文字（标题，内容，按钮）提示内容自定义－弹窗）</h2>
+            <span><a id="alertBtn3" href="javascript:;">查看演示</a></span>
+            <pre class="syntax brush-javascript">
+&lt;script type="text/javascript"&gt;
+	// （自定义文字）弹窗
+	$("#alertBtn3").click(function(){
+		$.alert(["标题","内容（333）","按钮名称"],function(obj){
+			// console.log("这里是回调！");
+			
+			$(obj).hide(); // 关闭弹窗
+		});	
+	});
+&lt;/script&gt;
+&lt;a id="alertBtn3" href="javascript:;"&gt;查看演示&lt;/a&gt;
+</pre>
+        </div>
+        <!-- 金额转化 -->
+        <div id="e" class="clear">
+            <h2 class="mt20">金额转化（¥：62737492374924）</h2>
+            <input type="text" class="jinEinput fl" />
+            <span class="fl">输出结果：</span>
+            <div class="jinE"></div>
+            <div class="clear"></div>
+            <pre class="syntax brush-javascript">
+&lt;script type="text/javascript"&gt;
+	// 金额转化带逗号
+	$(".jinE").html($.jinE("62737492374924"));
+&lt;/script&gt;
+
+&lt;input type="text" class="jinEinput fl" /&gt;
+&lt;span class="fl">输出结果：&lt;/span&gt;
+&lt;div class="jinE"&gt;&lt;/div&gt;
+</pre>
+        </div>
+        <!-- div模拟select -->
+        <div id="f" class="clear">
+            <h2>div模拟select</h2>
+            <div id="select1" class="divSelect">
+                <span>请选择</span>
+                <ul>
+                    <li><a href="javascript:;" selectid="1">11111111111111111111111111111111</a></li>
+                    <li><a href="javascript:;" selectid="2">2222</a></li>
+                    <li><a href="javascript:;" selectid="3">3333</a></li>
+                </ul>
+                <input name="" type="hidden" value="" class="div-input" />
+            </div>
+            <pre class="syntax brush-javascript">
+// div模拟select
+&lt;script type="text/javascript"&gt;
+	$("#select1").divSelect(2); // 默认选中第二个
+&lt;/script&gt;
+
+&lt;div id="select1" class="divSelect"&gt;
+	&lt;span&gt;请选择&lt;/span&gt;
+		&lt;ul&gt;
+			&lt;li&gt;&lt;a href="javascript:;" selectid="1"&gt;11111111111111111111111111111111&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="javascript:;" selectid="2"&gt;2222&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="javascript:;" selectid="3"&gt;3333&lt;/a&gt;&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;input name="" type="hidden" value="" class="div-input"/&gt;
+&lt;/div&gt;
+
+</pre>
+        </div>
+        <!-- form 表单校验 -->
+        <div id="g" class="clear">
+            <script type="text/javascript">
+                $(function () {
+                    $("#select3").divSelect();
+                    $.ckForm("#ckForm", "#ckFormBtn", {
+                        json: {
+                            "www": /^[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?$/i,
+                            "phone": /^1([3|5|6|7|8])\d{9}$/,
+                        }
+                    }, function () {
+                        alert("校验成功！");
+                    });
+                });
+            </script>
+            <h2>form 表单校验</h2>
+            <ul id="ckForm" class="ckForm border">
+                <li>
+                    <span>公司网址</span>
+                    <input type="text" value="" has="www" only="true" url="test.php" />
+                    <em>请输入正确网址</em>
+                    <div class="clear"></div>
+                </li>
+                <li>
+                    <span>公司电话</span>
+                    <input type="text" value="" has="phone" />
+                </li>
+                <li>
+                    <span>htmlSlct</span>
+                    <select has="select">
+                        <option value="0">请选择</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <cite>cite提示窗口</cite>
+                </li>
+                <li>
+                    <span>模拟Slctt</span>
+                    <div id="select3" class="divSelect fl" has="select">
+                        <span>请选择</span>
+                        <ul>
+                            <li><a href="javascript:;" selectid="1">11111111111111111111111111111111</a></li>
+                            <li><a href="javascript:;" selectid="2">2222</a></li>
+                            <li><a href="javascript:;" selectid="3">3333</a></li>
+                        </ul>
+                        <input name="" type="hidden" value="" class="div-input" />
+                    </div>
+                </li>
+                <center class="mt20"><a href="javascript:;" id="ckFormBtn" class="btn">确定</a></center>
+            </ul>
+            <pre class="syntax brush-javascript">
+&lt;script type="text/javascript"&gt;
+	// Div 模拟select
+	$("#select2").divSelect(); 
+	// Form 校验
+	$.ckForm("#ckForm","#ckFormBtn",{json:{
+        "www":/^[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?$/i,
+        "phone":/^1([3|5|6|7|8])\d{9}$/,
+	},},function(){
+		alert("校验成功！");
+	});
+&lt;/script&gt;
+&lt;ul id="ckForm" class="ckForm"&gt;
+	&lt;li&gt;
+		&lt;span&gt;公司网址：&lt;/span&gt;
+		&lt;!--  
+			only = true （唯一校验）
+			url ="*.*"	（唯一校验接口地址）
+			不需要唯一校验时，删除这两条属性。
+		--&gt;
+		&lt;input type="text" value="" has="www"  only="true" url="test.php" /&gt;
+		&lt;i&gt;固定显示的提示信息&lt;/i&gt;
+		&lt;em&gt;请输入正确网址&lt;/em&gt;
+		&lt;div class="clear"&gt;&lt;/div&gt;
+	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;span&gt;公司电话：&lt;/span&gt;
+		&lt;input type="text" value="" has="phone" /&gt;
+		&lt;em&gt;请输入正确手机号&lt;/em&gt;
+		&lt;div class="clear"&gt;&lt;/div&gt;
+	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;span&gt;htmlSlct：&lt;/span&gt;
+		&lt;select has="select"&gt;
+			&lt;option value="0"&gt;请选择&lt;/option&gt;
+			&lt;option value="1"&gt;1&lt;/option&gt;
+			&lt;option value="2"&gt;2&lt;/option&gt;
+			&lt;option value="3"&gt;3&lt;/option&gt;
+		&lt;/select&gt;
+		&lt;em&gt;请选择select&lt;/em&gt;
+		&lt;cite&gt;cite提示窗口&lt;/cite&gt;
+		&lt;div class="clear"&gt;&lt;/div&gt;
+	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;span&gt;模拟Slctt：&lt;/span&gt;
+		&lt;div id="select3" class="divSelect fl" has="select"&gt;
+			&lt;span&gt;请选择&lt;/span&gt;
+			&lt;ul&gt;
+				&lt;li&gt;&lt;a href="javascript:;" selectid="1"&gt;11111111111111111111111111111111&lt;/a&gt;&lt;/li&gt;
+				&lt;li&gt;&lt;a href="javascript:;" selectid="2"&gt;2222&lt;/a&gt;&lt;/li&gt;
+				&lt;li&gt;&lt;a href="javascript:;" selectid="3"&gt;3333&lt;/a&gt;&lt;/li&gt;
+			&lt;/ul&gt;
+			&lt;input name="" type="hidden" value="0" class="div-input"/&gt;
+		&lt;/div&gt;
+		&lt;em&gt;请选择select&lt;/em&gt;
+		&lt;div class="clear"&gt;&lt;/div&gt;
+	&lt;/li&gt;
+	&lt;center class="mt20"&gt;&lt;a href="javascript:;" id="ckFormBtn" class="btn"&gt;确定&lt;/a&gt;&lt;/center&gt;
+&lt;/ul&gt;
+				</pre>
+
+        </div>
+        <!-- cite 提示 -->
+        <div id="h" class="clear">
+            <script type="text/javascript">
+                $(function () {
+                    // cite 提示
+                    $.cite(".cite");
+
+                });
+            </script>
+            <h2>cite 提示</h2>
+            <div>
+                <a href="javascript:;" class="btn cite">鼠标放这里看效果</a>
+                <cite>提示内容</cite>
+            </div>
+            <pre class="syntax brush-javascript">
+&lt;script type="text/javascript"&gt;
+	$(function(){
+		// cite 提示
+		$.cite(".cite");
+		// $.cite(".cite,.cite2"); 支持多个元素
+	});
+&lt;/script&gt;
+&lt;div&gt;
+	&lt;a href="javascript:;" class="btn cite"&gt;鼠标放这里看效果&lt;/a&gt;
+	&lt;cite&gt;按钮&lt;/cite&gt;
+&lt;/div&gt;
+</pre>
+        </div>
+        <!-- cookie -->
+        <div id="i" class="clear">
+            <h2>cookie 设置</h2>
+            <pre class="syntax brush-javascript">
+&lt;script type="text/javascript"&gt;
+	$(function(){
+		// Cookie  操作
+		$.setCookie ("xiaoqi", "Cookic"); // 设置 
+		console.log($.getCookie('xiaoqi')); // 获取
+		$.delCookie("xiaoqi");   // 删除
+	})
+&lt;/script&gt;
+</pre>
+        </div>
+        <!-- ajax -->
+        <div id="j" class="clear">
+            <script type="text/javascript">
+                $(function () {
+                    $(".ajaxInputBtn").click(function () {
+                        var val = $(".ajaxInput").val();
+                        if (val != "") {
+                            $.baseAjax({
+                                url: "test.php",
+                                data: {
+                                    "value": val
+                                }
+                            }, function (msg) {
+                                if (msg.error_code) {
+                                    $("#inputTxt").html("正确");
+                                } else {
+                                    $("#inputTxt").html(msg.error_msg.value);
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+            <h2>ajax</h2>
+            <pre class="syntax brush-javascript">
+&lt;script type="text/javascript"&gt;
+	$(function(){
+		$(".ajaxInputBtn").click(function(){
+			var val = $(".ajaxInput").val();
+			if(val != ""){
+				$.baseAjax({
+					url:"test.php",
+					data: {"value":val}
+				},function(msg){
+					console.log(msg)
+					if(msg.error_code){
+						$("#inputTxt").html("正确");
+					}else {
+						$("#inputTxt").html(msg.error_msg.value);
+					}
+				});
+			}
+		});
+	});
+&lt;/script&gt;
+
+失去焦点执行ajax：&lt;input type="text" class="ajaxInput" value="" /&gt;
+&lt;a href="javascript:;" class="btn ajaxInputBtn"&gt;提交&lt;/a&gt;
+&lt;em id="inputTxt"&gt;&lt;/em&gt;
+</pre> 失去焦点执行ajax：
+            <input type="text" class="ajaxInput" value="" style="border:1px solid #ccc;height:30px;" />
+            <a href="javascript:;" class="btn ajaxInputBtn">提交</a>
+            <em id="inputTxt"></em>
+        </div>
+        <!-- 进度条 -->
+        <div id="k" class="clear">
+            <h2>进度条</h2>
+            <div class="navNumPic">
+                <ul class="picline4">
+                    <li class="show_pic">
+                        <div class="linePic">1</div>
+                        <div class="line_px"></div>
+                        <dl>
+                            <dt>张骞</dt>
+                            <dd>公司法定代表人</dd>
+                            <dd>2016-08-14 10:20</dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <div class="linePic">2</div>
+                        <div class="line_px"></div>
+                        <dl>
+                            <dt>张骞</dt>
+                            <dd>公司法定代表人</dd>
+                            <dd>2016-08-14 10:20</dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <div class="linePic">3</div>
+                        <div class="line_px"></div>
+                    </li>
+                    <li>
+                        <div class="linePic">4</div>
+                        <div class="line_px"></div>
+                    </li>
+                </ul>
+            </div>
+            <pre class="syntax brush-javascript">
+&lt;div class="navNumPic"&gt;
+    &lt;ul class="picline4"&gt;
+        &lt;li class="show_pic"&gt;
+            &lt;div class="linePic"&gt;1&lt;/div&gt;
+            &lt;div class="line_px"&gt;&lt;/div&gt;
+            &lt;dl&gt;
+                    &lt;dt&gt;张骞&lt;/dt&gt;
+                    &lt;dd&gt;公司法定代表人&lt;/dd&gt;
+                    &lt;dd&gt;2016-08-14 10:20&lt;/dd&gt;
+            &lt;/dl&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;div class="linePic"&gt;2&lt;/div&gt;
+            &lt;div class="line_px"&gt;&lt;/div&gt;
+            &lt;dl&gt;
+                &lt;dt&gt;张骞&lt;/dt&gt;
+                &lt;dd&gt;公司法定代表人&lt;/dd&gt;
+                &lt;dd&gt;2016-08-14 10:20&lt;/dd&gt;
+            &lt;/dl&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;div class="linePic"&gt;3&lt;/div&gt;
+            &lt;div class="line_px"&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;div class="linePic"&gt;4&lt;/div&gt;
+            &lt;div class="line_px"&gt;&lt;/div&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+				</pre>
+        </div>
+        <!-- iframe 父级－子级 操作 -->
+        <div id="l" class="clear">
+            <img src="images/iframe.png" style="width:60%;" />
+        </div>
+        <!-- 锚点定位 -->
+        <div id="m" class="clear">
+            <h2>锚点定位</h2>
+            <pre class="syntax brush-javascript">
+&lt;script type="text/javascript"&gt;
+	$(function(){
+		// 锚点定位
+		$('nav a').click(function(){
+			$(this).maoDian();
+		});
+	});
+	
+	
+	&lt;a href="#a"&gt;a&lt;/a&gt;
+	
+	&lt;a id="a"&gt;div&lt;/a&gt;
+&lt;/script&gt;
+</pre>
+
+        </div>
+
+
+
+        <div class="clear">
+            clear 占位符
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+    </div>
+</body>
+
+</html>
